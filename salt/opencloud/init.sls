@@ -115,7 +115,7 @@ def run():
         if run_init:
             init_insecure = opencloud_pillar.get('init_insecure', False)
             admin_password = opencloud_pillar.get('admin_password', '')
-            init_cmd = "opencloud init --config-path /etc/opencloud --insecure {}".format(
+            init_cmd = "opencloud-server init --config-path /etc/opencloud-server --insecure {}".format(
                 'true' if init_insecure else 'false'
             )
             if admin_password:
@@ -124,7 +124,7 @@ def run():
             config['opencloud_init'] = {
                 'cmd.run': [
                     {'name': init_cmd},
-                    {'creates': '/etc/opencloud/opencloud.yaml'},
+                    {'creates': '/etc/opencloud-server/opencloud.yaml'},
                     {'require': ['opencloud_packages']},
                     {'require_in': ['opencloud_env_file']},
                 ]
