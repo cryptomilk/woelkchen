@@ -135,8 +135,17 @@ def run():
             if collab and 'COLLABORATION_APP_NAME' not in env_vars:
                 env_vars['COLLABORATION_APP_NAME'] = collab
 
-        env_contents = '\n'.join('{}={}'.format(k, v) for k, v in sorted(env_vars.items()))
-        if env_contents:
+        managed_header = (
+            '########################################################################\n'
+            '#                                                                      #\n'
+            '#              THIS FILE IS MANAGED BY SALT - DO NOT EDIT              #\n'
+            '#                                                                      #\n'
+            '# The contents of this file are managed by Salt. Any changes to this   #\n'
+            '# file may be overwritten automatically and without warning.           #\n'
+            '########################################################################\n'
+        )
+        env_contents = managed_header + '\n'.join('{}={}'.format(k, v) for k, v in sorted(env_vars.items()))
+        if env_vars:
             env_contents += '\n'
 
         config['opencloud_env_file'] = {
@@ -171,7 +180,7 @@ def run():
                     {'user': 'root'},
                     {'group': 'opencloud-server'},
                     {'mode': '0640'},
-                    {'contents': yaml.dump(csp_config.get('config', {}))},
+                    {'contents': managed_header + yaml.dump(csp_config.get('config', {}))},
                     {'require': ['opencloud_config_dir']},
                 ]
             }
@@ -202,7 +211,7 @@ def run():
                 }
                 mt.update(overrides)
                 mimetypes.append(mt)
-            registry_content = yaml.dump({'app_registry': {'mimetypes': mimetypes}}, default_flow_style=False)
+            registry_content = managed_header + yaml.dump({'app_registry': {'mimetypes': mimetypes}}, default_flow_style=False)
 
             config['opencloud_app_registry'] = {
                 'file.managed': [
