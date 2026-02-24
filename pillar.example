@@ -32,3 +32,22 @@ opencloud:
   #     directives:
   #       connect-src:
   #         - '...'
+  # app_registry:
+  #   collaboration_app: CollaboraOnline
+  #   # path: /etc/opencloud-server/app-registry.yaml
+  #   types:
+  #     - pdf
+  #     - odt
+  #     - ods
+  #     - odp
+  #     - docx
+  #     - docxf
+  #     - xlsx
+  #     - pptx
+  #     - ipynb
+  #     # override example:
+  #     # - extension: custom
+  #     #   mime_type: application/x-custom
+  #     #   name: Custom Format
+  #     #   description: My custom format
+  #     #   collaboration: true
