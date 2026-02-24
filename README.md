@@ -27,7 +27,7 @@ pillar_roots:
 if you are using our [cfgmgmt-template](https://github.com/darix/cfgmgmt-template) as a starting point the saltmaster you can simplify the setup with:
 
 ```
-git submodule add https://github.com/darix/woelkchen formulas/woelkchen
+git submodule add https://github.com/cryptomilk/woelkchen formulas/woelkchen
 ln -s /srv/cfgmgmt/formulas/woelkchen/config/enable_woelkchen.conf /etc/salt/master.d/
 systemctl restart salt-master.service
 ```
